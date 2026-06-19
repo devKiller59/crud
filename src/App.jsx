@@ -44,12 +44,24 @@ function App() {
     setIsEdited(true)
   };
 
+  // Limpia el estado del usuario seleccionado para editar
+  const handlerClearDefValues = () => {
+    setEditDefValues(null);
+  }
+
   const userList = list.map((user) => <UserCard userObj={user} onDelete={handlerOnDelete} onEdit={handlerOnEdit} key={user.id} />);
 
   return (
     <div className="App">
       <div className='userform'>
-        <UserForm onCreate={handlerOnCreateUser} onEdit={handlerOnEdit} defValues={editDefValues} isEdited={isEdited} setIsEdited={setIsEdited} />
+        <UserForm 
+        onCreate={handlerOnCreateUser} 
+        onEdit={handlerOnEdit} 
+        defValues={editDefValues} 
+        isEdited={isEdited} 
+        setIsEdited={setIsEdited} 
+        clearDefValues={handlerClearDefValues}
+        />
       </div>
       <div className='userlist'>
         {userList}

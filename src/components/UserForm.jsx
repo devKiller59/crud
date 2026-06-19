@@ -13,37 +13,47 @@ const defaultValues = {
   birthday: ""
 };
 
-const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited }) => {
+const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited, clearDefValues }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (defValues) {
-      reset(defValues)
+      reset(defValues) // Si vienen datos de un usuario, llena el formulario
+    } else {
+      reset(defaultValues) // Si no vienen datos (o se limpian), vacía el formulario
     }
-  }, [reset, defValues]);
+  }, [defValues, reset]);
 
   const onSubmit = (userObj) => {
     if (!!isEdited) {
-      dispatch(editUserById(userObj))
-      setIsEdited(false)
-      reset(defaultValues)
-      dispatch(fetchAllUsers())
+      dispatch(editUserById(userObj));
+      setIsEdited(false);
+      if (clearDefValues) clearDefValues(); // <-- Limpiamos el usuario actual al guardar
+      reset(defaultValues);
+      dispatch(fetchAllUsers());
     } else {
       onCreate(userObj)
       reset(defaultValues)
     }
   };
 
+  // Resetear el estado y limpieza de inputs al cancelar.
+  const handleCancel = () => {
+    setIsEdited(false);
+    if (clearDefValues) clearDefValues();
+    reset(defaultValues);
+  };
+
   return (
     <form className='user-form' onSubmit={handleSubmit(onSubmit)} >
-      <div className='user-field'>
+      <div className='user-field name-group'>
         <label htmlFor='first_name' ><p><FaUserAlt /></p></label>
-        <input id='first_name' placeholder='First Name' required {...register("first_name")} />
-        <br />
-        <label htmlFor='last_name' ></label>
-        <input id='last_name' placeholder='Last Name' required {...register("last_name")} />
+        <div className='name-inputs'>
+          <input id='first_name' placeholder='First Name' required {...register("first_name")} />
+          <input id='last_name' placeholder='Last Name' required {...register("last_name")} />
+        </div>
       </div>
       <div className='user-field'>
         <label htmlFor='email' ><p><AiOutlineMail /></p></label>
@@ -59,7 +69,7 @@ const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited }) => {
       </div>
       <div className="submit">
         <input id='submit' type="submit" value={isEdited ? "Upload" : "Sign Up"} />
-        {isEdited && (<input id='submit' type="submit" value='Cancel' />)}
+        {isEdited && (<input id='cancel' type='button' value='Cancel' onClick={handleCancel}/>)}
       </div>
     </form>
   )

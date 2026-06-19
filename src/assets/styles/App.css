@@ -1,31 +1,39 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .App {
   background-color: #299494;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
   color: #000;
-
+  padding: 2rem;
+  padding-right: calc(min(35vw, 440px) + 4rem);
 }
 
 .userform {
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 35%;
+  height: 100vh;
+  width: min(35vw, 440px);
+  min-width: 320px;
   background-color: #fff;
+  padding: 2rem;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .userlist {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-left: 2rem;
-  width: max-content;
+  max-width: calc(100vw - min(35vw, 440px) - 6rem);
+  margin-left: 1.25rem;
 }
 
 /* UserForm */
@@ -33,13 +41,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  gap: 1rem;
 }
 
 .user-field {
   display: flex;
   align-items: center;
-  padding: 5px 0px;
+  gap: 0.75rem;
   width: 100%;
+  justify-content: flex-start;
+}
+
+.user-field.name-group {
+  align-items: center;
+}
+
+.name-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-right: 0.5rem;
+}
+
+.user-field label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
 }
 
 .user-field input {
@@ -47,13 +80,23 @@
   border: 2px solid #9b9b9b;
   border-radius: 40px;
   text-align: center;
-  padding: 10px 0px;
-  flex-grow: 1;
-  margin-right: .4rem;
+  padding: 10px 0;
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 140px;
+  margin-right: 0.5rem;
 }
 
 .user-field p {
-  margin-right: 1rem;
+  margin: 0;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 #birthday {
@@ -61,91 +104,204 @@
   text-transform: uppercase;
 }
 
-#submit {
+#submit, #cancel {
   margin-top: 20px;
-  background-color: rgb(87, 114, 238);
+  background-color: rgb(3, 35, 182);
   border: 2px solid #1b1b1b;
   border-radius: 40px;
-  padding: 10px 50px;
+  padding: 10px 30px;
   color: #fff;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  width: auto;
+  max-width: 220px;
+  min-width: 120px;
 }
 
-#submit:hover {
-  transform: scale(1.1);
+#submit:hover, #cancel:hover {
+  transform: scale(1.03);
+}
+
+#submit:hover, #cancel:hover {
+  transform: scale(1.05);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
 }
 
-/* UserCard */
 .usr-card {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid #9b9b9b;
+  flex-wrap: nowrap;
+  border: 2px solid #5a5a5a;
   border-radius: 2rem;
-  padding: 0px 40px;
+  padding: 1rem 1.25rem;
   background-color: #fff;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 1rem;
+}
+
+.usr-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.usr-card > div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.usr-card h2,
+.usr-card p {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0.2rem;
+}
+
+.usr-card h2 {
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+}
+
+.usr-card p {
+  font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 .usr-btn b:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+
+.usr-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem;
 }
 
 .usr-btn button {
   display: flex;
   border: none;
   background: none;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   font-size: larger;
-  margin-left: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .usr-btn b {
   width: fit-content;
   height: fit-content;
-  cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+.usr-btn button:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.usr-btn button:active {
+  transform: scale(0.9);
+}
+
+.usr-btn button[title] {
+  position: relative;
+  color: #333;
+  border-radius: 40px;
+}
+
+/* Contenedor del icono y el texto oculto */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Diseño base del texto emergente */
+.tooltip-text {
+  visibility: hidden;
+  background-color: #252525; /* Color oscuro de fondo */
+  color: #ffffff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  
+  /* Posicionamiento justo arriba del icono */
+  position: absolute;
+  bottom: 100%; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  white-space: nowrap;
+  
+  /* Animación de desvanecimiento */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Flecha pequeña debajo del cuadro del tooltip */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #252525 transparent transparent transparent;
+}
+
+/* CUANDO EL CURSOR SE PONE ENCIMA (:hover): Muestra el texto */
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (max-width: 900px) {
   .App {
-    flex-direction: column;
+    padding: 0;
   }
 
   .userform {
-    position: inherit;
+    position: static;
     width: 100%;
-    height: 50vh;
+    height: auto;
+    min-width: auto;
+    padding: 1rem;
+    margin: 1rem 0;
   }
 
   .userlist {
-    padding: 1.5rem;
-    grid-template-columns: 1fr;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 1.25rem;
   }
 
   .usr-card {
-    width: 75%;
-    height: 100%;
+    padding: 1rem;
+    transform: none;
   }
 
-  .user-form {
-    width: 80%;
+  .user-field,
+  .user-field.name-group input {
+    min-width: 0;
+    margin-right: 0.5rem;
   }
 
-  #first_name,
-  #last_name,
-  #email,
-  #birthday {
-    width: 100%;
+  .submit {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
   }
 
   #submit {
-    width: 100%;
-    padding: 10px 10px;
+    width: auto;
+    max-width: 180px;
+    padding: 12px 18px;
   }
 }
