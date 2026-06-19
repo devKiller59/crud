@@ -1,6 +1,7 @@
 import { AiOutlineMail } from "react-icons/ai";
 import { FaBirthdayCake, FaPencilAlt, FaRegTrashAlt, FaUserAlt } from "react-icons/fa";
 import { BsFillClockFill } from "react-icons/bs";
+import { RxUpdate } from 'react-icons/rx';
 
 
 const UserCard = ({ userObj, onDelete, onEdit }) => {
@@ -12,6 +13,13 @@ const UserCard = ({ userObj, onDelete, onEdit }) => {
         <p><AiOutlineMail /> {userObj.email}</p>
         <p><FaBirthdayCake /> {userObj.birthday ? userObj.birthday.split('T')[0] : 'No asignada'}</p>
         <p><BsFillClockFill /> {formatearFecha(userObj._id)}</p>
+
+        {/* REGISTRO DE ACTUALIZACIÓN: Solo se dibuja si el usuario ha sido editado alguna vez */}
+        {userObj.updatedAt && userObj.updatedAt !== userObj.createdAt && (
+          <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '4px' }}>
+            <RxUpdate /> {formatearFechaActualizacion(userObj.updatedAt)}
+          </p>
+        )}
       </div>
       <div className="usr-btn">
         <div className="tooltip-container">
@@ -52,6 +60,22 @@ const formatearFecha = (mongoId) => {
   catch (error) {
     return 'Fecha no disponible';
   }
-}
+};
+
+const formatearFechaActualizacion = (isoString) => {
+  if (!isoString) return 'Fecha no disponible';
+
+    // Convertir la fecha en formato ISO a un objeto Date
+  const fecha = new Date(isoString);
+
+    // Formatear la fecha en el formato deseado (dd/mm/yyyy hh:mm)
+  return fecha.toLocaleDateString('es-CO', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
 
 export default UserCard;
