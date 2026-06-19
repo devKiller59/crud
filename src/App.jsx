@@ -6,6 +6,7 @@ import { createUser, deleteUserById, fetchAllUsers } from "./redux/crudSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaGithub, FaHeart } from 'react-icons/fa';
 
 function App() {
 
@@ -71,6 +72,12 @@ function App() {
       <div className='userlist'>
         {userList}
       </div>
+      <footer className="app-footer">
+        <p>Hecho con <FaHeart style={{ color: '#e74c3c' }} /> por <strong>DevKiller59</strong> &copy; 2026</p>
+        <div className="footer-links">
+          <a href="https://github.com/devkiller59" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
+        </div>
+      </footer>
     </div>
   )
 };
