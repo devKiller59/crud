@@ -260,17 +260,22 @@
 }
 
 .app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  margin-top: 40px;
-  padding: 20px 0;
+  height: 45px;
+  background-color: #111111;
+  border-top: 1px solid #222222;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-top: 1px solid #eee;
-  font-size: 0.9rem;
-  color: #666;
+  justify-content: space-between; /* Distribuye texto a la izquierda y link a la derecha */
+  padding: 0 30px; /* Separación de los bordes de la pantalla */
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  color: #aaaaaa;
+  z-index: 9999; /* Se asegura de estar por encima de las tarjetas y el formulario */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .app-footer p {
@@ -280,22 +285,26 @@
   margin: 0;
 }
 
-.footer-links {
-  display: flex;
-  gap: 15px;
+.app-footer .heart-icon {
+  color: #ff4757;
 }
 
 .footer-links a {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #444;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
 }
 
 .footer-links a:hover {
-  color: #007bff; /* Color azul al pasar el cursor */
+  opacity: 0.8;
+}
+
+.userlist {
+  padding-bottom: 60px; 
 }
 
 @media screen and (max-width: 900px) {

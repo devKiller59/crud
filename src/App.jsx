@@ -73,7 +73,7 @@ function App() {
         {userList}
       </div>
       <footer className="app-footer">
-        <p>Hecho con <FaHeart style={{ color: '#e74c3c' }} /> por <strong>DevKiller59</strong> &copy; 2026</p>
+        <p>Hecho con <FaHeart className="heart-icon" /> por <strong>DevKiller59</strong> &copy; 2026</p>
         <div className="footer-links">
           <a href="https://github.com/devkiller59" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
         </div>
