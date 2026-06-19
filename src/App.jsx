@@ -4,6 +4,8 @@ import UserForm from './components/UserForm';
 import UserCard from './components/UserCard';
 import { createUser, deleteUserById, fetchAllUsers } from "./redux/crudSlice";
 import { useSelector, useDispatch } from "react-redux";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -32,16 +34,18 @@ function App() {
   }, [deleteId, dispatch]);
 
   const handlerOnCreateUser = (event) => {
-    setNewUser(event)
+    setNewUser(event);
+    toast.success('¡Usuario creado con éxito! 🎉');
   };
 
   const handlerOnDelete = (id) => {
     setDeleteId(id)
+    toast.error('Usuario eliminado correctamente 🗑️');
   };
 
   const handlerOnEdit = (userObj) => {
     setEditDefValues(userObj)
-    setIsEdited(true)
+    setIsEdited(true);
   };
 
   // Limpia el estado del usuario seleccionado para editar

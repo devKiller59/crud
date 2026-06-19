@@ -15,7 +15,7 @@ const UserCard = ({ userObj, onDelete, onEdit }) => {
         <p><BsFillClockFill /> {formatearFecha(userObj._id)}</p>
 
         {/* REGISTRO DE ACTUALIZACIÓN: Solo se dibuja si el usuario ha sido editado alguna vez */}
-        {userObj.updatedAt && userObj.updatedAt !== userObj.createdAt && (
+        {userObj.updatedAt && (
           <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '4px' }}>
             <RxUpdate /> {formatearFechaActualizacion(userObj.updatedAt)}
           </p>

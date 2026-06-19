@@ -4,6 +4,7 @@ import { editUserById, fetchAllUsers } from "../redux/crudSlice";
 import { useDispatch } from "react-redux";
 import { FaUserAlt, FaBirthdayCake, FaLock } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
+import {toast} from 'react-toastify';
 
 const defaultValues = {
   first_name: "",
@@ -41,6 +42,7 @@ const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited, clearDef
       if (clearDefValues) clearDefValues(); // <-- Limpiamos el usuario actual al guardar
       reset(defaultValues);
       dispatch(fetchAllUsers());
+      toast.success('¡Usuario actualizado con éxito! ✅');
     } else {
       onCreate(userObj)
       reset(defaultValues)
