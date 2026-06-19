@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const deleteUser = async(id) => {
-  const URL = `https://dk59-crud-api.onrender.com/users/${id}/`;
+const deleteUser = async(_id) => {
+  const URL = `https://dk59-crud-api.onrender.com/users/${_id}/`;
   const req = await axios.delete(URL);
   return req
 }

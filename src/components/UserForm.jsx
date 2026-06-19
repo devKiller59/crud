@@ -20,9 +20,17 @@ const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited, clearDef
 
   useEffect(() => {
     if (defValues) {
-      reset(defValues) // Si vienen datos de un usuario, llena el formulario
+      // Creamos una copia de los valores que vienen del usuario
+      const valoresFormateados = { ...defValues };
+    
+      // Si el usuario tiene una fecha de cumpleaños, la recortamos a "AAAA-MM-DD"
+    if (valoresFormateados.birthday) {
+      valoresFormateados.birthday = valoresFormateados.birthday.split('T')[0];
+    }
+    
+      reset(valoresFormateados); // Cargamos los datos limpios en el formulario
     } else {
-      reset(defaultValues) // Si no vienen datos (o se limpian), vacía el formulario
+      reset(defaultValues);
     }
   }, [defValues, reset]);
 

@@ -45,8 +45,8 @@ export const editUserById = (userObj) => (dispatch) => {
     })
 }
 
-export const deleteUserById = (id) => (dispatch) => {
-  deleteUser(id)
+export const deleteUserById = (_id) => (dispatch) => {
+  deleteUser(_id)
     .then(res => {
       dispatch(fetchAllUsers());
     })
