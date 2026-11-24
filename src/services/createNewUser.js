@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const createNewUser = async (data) => {
-  const URL = `${process.env.REACT_APP_API_URL}/api/users/register/`;
+  const URL = `${process.env.REACT_APP_API_URL}/api/auth/register/`;
 
   // Si no viene username en data, lo generamos único usando el correo + un número aleatorio
   const payload = {

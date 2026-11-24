@@ -17,7 +17,7 @@ export default function TestLoginBtn() {
     const BASE_URL = process.env.REACT_APP_API_URL;
 
     try {
-      const res = await axios.post(`${BASE_URL}/api/users/login/`, {
+      const res = await axios.post(`${BASE_URL}/api/auth/login/`, {
         email,
         password
       });
