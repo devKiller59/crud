@@ -14,9 +14,10 @@ export default function TestLoginBtn() {
     e.preventDefault();
     setLoading(true);
 
+    const BASE_URL = process.env.REACT_APP_API_URL;
+
     try {
-      // Ajusta la ruta si tu endpoint en KillerCore API es /login o /users/login
-      const res = await axios.post('https://dk59-crud-api.onrender.com/api/users/login/', {
+      const res = await axios.post(`${BASE_URL}/api/users/login/`, {
         email,
         password
       });
@@ -34,8 +35,7 @@ export default function TestLoginBtn() {
   };
 
   return (
-    <>
-      {/* Botón circular con icono de llave */}
+    <div>
       <button
         type="button"
         className="btn-test-login"
@@ -45,7 +45,6 @@ export default function TestLoginBtn() {
         <FaKey size={16} />
       </button>
 
-      {/* Modal flotante */}
       {isOpen && createPortal(
         <div className="login-modal-overlay" onClick={() => setIsOpen(false)}>
           <div className="login-modal-box" onClick={(e) => e.stopPropagation()}>
@@ -91,6 +90,6 @@ export default function TestLoginBtn() {
         </div>,
         document.body
       )}
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getAllUsers = async () =>{
-  const URL = `https://dk59-crud-api.onrender.com/api/users`;
+  const URL = `${process.env.REACT_APP_API_URL}/api/users`;
   const req = await axios.get(URL);
   return req.data
 }
