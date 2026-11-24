@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import './assets/styles/App.css';
 import UserForm from './components/UserForm';
 import UserCard from './components/UserCard';
+import ActionBtn from './components/ActionBtn';
+import TestLoginBtn from './components/TestLoginBtn';
 import { createUser, deleteUserById, fetchAllUsers } from "./redux/crudSlice";
 import { useSelector, useDispatch } from "react-redux";
-import {ToastContainer, toast} from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGithub, FaHeart } from 'react-icons/fa';
 
@@ -36,12 +38,10 @@ function App() {
 
   const handlerOnCreateUser = (event) => {
     setNewUser(event);
-    toast.success('¡Usuario creado con éxito! 🎉');
   };
 
   const handlerOnDelete = (id) => {
     setDeleteId(id)
-    toast.error('Usuario eliminado correctamente 🗑️');
   };
 
   const handlerOnEdit = (userObj) => {
@@ -54,7 +54,15 @@ function App() {
     setEditDefValues(null);
   }
 
-  const userList = list.map((user) => <UserCard userObj={user} onDelete={handlerOnDelete} onEdit={handlerOnEdit} key={user.id} />);
+  const userList = list.map((user) => (
+    <UserCard 
+      userObj={user} 
+      onDelete={handlerOnDelete} 
+      onEdit={handlerOnEdit} 
+      key={user._id} 
+    />
+  ));
+
 
   return (
     <div className="App">
@@ -68,12 +76,17 @@ function App() {
         setIsEdited={setIsEdited} 
         clearDefValues={handlerClearDefValues}
         />
+        <div className="extra-actions">
+          <ActionBtn />
+          <TestLoginBtn />
+        </div>
       </div>
       <div className='userlist'>
         {userList}
       </div>
       <footer className="app-footer">
-        <p>Hecho con <FaHeart className="heart-icon" /> por <strong>DevKiller59</strong> &copy; 2026</p>
+        <p>Hecho con <FaHeart className="heart-icon" /> por <strong>DevKiller59</strong> &copy; {new Date().getFullYear()}</p>
+        <p>Powered by <strong>KillerCore API</strong></p>
         <div className="footer-links">
           <a href="https://github.com/devkiller59" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
         </div>

@@ -1,5 +1,5 @@
 import { AiOutlineMail } from "react-icons/ai";
-import { FaBirthdayCake, FaPencilAlt, FaRegTrashAlt, FaUserAlt } from "react-icons/fa";
+import { FaBirthdayCake, FaPencilAlt, FaRegTrashAlt, FaUserAlt, FaAt } from "react-icons/fa";
 import { BsFillClockFill } from "react-icons/bs";
 import { RxUpdate } from 'react-icons/rx';
 
@@ -10,6 +10,9 @@ const UserCard = ({ userObj, onDelete, onEdit }) => {
     <div className="usr-card">
       <div>
         <h2><FaUserAlt /> {userObj.first_name} {userObj.last_name}</h2>
+        {userObj.username && (
+          <p className="user-username"><FaAt /> {userObj.username}</p>
+        )}
         <p><AiOutlineMail /> {userObj.email}</p>
         <p><FaBirthdayCake /> {userObj.birthday ? userObj.birthday.split('T')[0] : 'No asignada'}</p>
         <p><BsFillClockFill /> {formatearFecha(userObj._id)}</p>

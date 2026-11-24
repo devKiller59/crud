@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify"; // Opcional: para mantener tus alertas bonitas
 import getAllUsers from "../services/getAllUsers";
 import editUser from "../services/editUser";
 import createNewUser from '../services/createNewUser';
@@ -22,45 +23,55 @@ export const userSlice = createSlice({
   }
 });
 
-export const { setUserList, setEditUserById } = userSlice.actions;
+export const { setUserList, setEditUserId } = userSlice.actions;
 export default userSlice.reducer;
 
 export const fetchAllUsers = () => (dispatch) => {
-  getAllUsers()
+  return getAllUsers()
     .then(res => {
       dispatch(setUserList(res));
     })
     .catch(err => {
       console.log(err);
-    })
+    });
 }
 
 export const editUserById = (userObj) => (dispatch) => {
-  editUser(userObj)
+  return editUser(userObj)
     .then(res => {
+      toast.success('¡Usuario editado con éxito! ✏️');
       dispatch(fetchAllUsers());
     })
     .catch(err => {
       console.log(err);
-    })
+    });
 }
 
 export const deleteUserById = (_id) => (dispatch) => {
-  deleteUser(_id)
+  return deleteUser(_id)
     .then(res => {
+      toast.success('Usuario eliminado correctamente 🗑️');
       dispatch(fetchAllUsers());
     })
     .catch(err => {
       console.log(err);
-    })
+    });
 }
 
 export const createUser = (data) => (dispatch) => {
-  createNewUser(data)
+  return createNewUser(data)
     .then(res => {
-      dispatch(fetchAllUsers());
+      toast.success('¡Usuario creado con éxito! 🎉');
     })
     .catch(err => {
-      console.log(err);
+      if (err.response?.status === 500) {
+        toast.warning('Usuario guardado, sincronizando lista...');
+      } else {
+        const mensajeError = err.response?.data?.message || 'Error al registrar usuario';
+        toast.error(mensajeError);
+      }
     })
+    .finally(() => {
+      dispatch(fetchAllUsers());
+    });
 }

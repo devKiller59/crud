@@ -10,6 +10,8 @@
   padding-right: calc(min(35vw, 440px) + 4rem);
 }
 
+/* UserForm */
+
 .userform {
   position: fixed;
   top: 0;
@@ -28,15 +30,6 @@
   align-items: center;
 }
 
-.userlist {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: calc(100vw - min(35vw, 440px) - 6rem);
-  margin-left: 1.25rem;
-}
-
-/* UserForm */
 .user-form {
   display: flex;
   flex-direction: column;
@@ -105,12 +98,10 @@
 }
 
 #submit, #cancel {
-  margin-top: 20px;
-  background-color: rgb(3, 35, 182);
+  margin: 20px 0;
   border: 2px solid #1b1b1b;
   border-radius: 40px;
   padding: 10px 30px;
-  color: #fff;
   transition: all 0.2s ease-in-out;
   width: auto;
   max-width: 220px;
@@ -118,13 +109,38 @@
 }
 
 #submit:hover, #cancel:hover {
-  transform: scale(1.03);
-}
-
-#submit:hover, #cancel:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+#submit[value="Sign Up"] {
+  background-color: #1d9393;
+  color: #fff;
+}
+
+#submit[value="Sign Up"]:hover {
+  background-color: #167575;
+}
+
+#submit[value="Upload"] {
+  background-color: #115e59;
+  color: #fff;
+}
+
+#submit[value="Upload"]:hover {
+  background-color: #0d4a46;
+}
+
+#cancel {
+  background-color: #f3f4f6;
+  color: #1b1b1b;
+}
+
+#cancel:hover {
+  background-color: #e5e7eb;
+}
+
+/* UserCard */
 
 .usr-card {
   display: flex;
@@ -207,41 +223,36 @@
 }
 
 .usr-btn button[title] {
-  position: relative;
+  position: absolute;
   color: #333;
   border-radius: 40px;
 }
 
-/* Contenedor del icono y el texto oculto */
+/* Tooltip Styles */
+
 .tooltip-container {
   position: relative;
   display: inline-block;
 }
 
-/* Diseño base del texto emergente */
 .tooltip-text {
   visibility: hidden;
-  background-color: #252525; /* Color oscuro de fondo */
+  background-color: #252525;
   color: #ffffff;
   text-align: center;
   border-radius: 6px;
   padding: 6px 10px;
   font-size: 12px;
-  
-  /* Posicionamiento justo arriba del icono */
   position: absolute;
   bottom: 100%; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
   white-space: nowrap;
-  
-  /* Animación de desvanecimiento */
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
 
-/* Flecha pequeña debajo del cuadro del tooltip */
 .tooltip-text::after {
   content: "";
   position: absolute;
@@ -253,11 +264,23 @@
   border-color: #252525 transparent transparent transparent;
 }
 
-/* CUANDO EL CURSOR SE PONE ENCIMA (:hover): Muestra el texto */
 .tooltip-container:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
 }
+
+/* UserList */
+
+.userlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: calc(100vw - min(35vw, 440px) - 6rem);
+  margin-left: 1.25rem;
+  padding-bottom: 60px; 
+}
+
+/* Footer */
 
 .app-footer {
   position: fixed;
@@ -269,12 +292,12 @@
   border-top: 1px solid #222222;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribuye texto a la izquierda y link a la derecha */
-  padding: 0 30px; /* Separación de los bordes de la pantalla */
+  justify-content: space-between;
+  padding: 0 30px;
   box-sizing: border-box;
   font-size: 0.85rem;
   color: #aaaaaa;
-  z-index: 9999; /* Se asegura de estar por encima de las tarjetas y el formulario */
+  z-index: 9999;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -303,9 +326,209 @@
   opacity: 0.8;
 }
 
-.userlist {
-  padding-bottom: 60px; 
+a {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit;        /* Hereda el color del texto normal que lo rodea */
 }
+
+/* Botón informativo */
+
+.btn-info {
+  background-color: #1d9393;
+  border: 2px solid #000000;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-info:hover {
+  background-color: #157373;
+  transform: scale(1.06);
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.popup-contenido {
+  background: #ffffff;
+  padding: 26px;
+  border-radius: 20px;
+  border: 2px solid #000000;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  text-align: center;
+  color: #111111;
+}
+
+.popup-botones {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.btn-cerrar {
+  background-color: #f3f4f6;
+  color: #111111;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  padding: 11px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-cerrar:hover {
+  background-color: #e5e7eb;
+  transform: scale(1.02);
+}
+
+.btn-accion {
+  background-color: #1d9393;
+  color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  padding: 11px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-accion:hover {
+  background-color: #157373;
+  transform: scale(1.02);
+}
+
+/* Test Login */
+
+.btn-test-login {
+  background-color: #115e59; /* Teal oscuro para diferenciarlo del botón '?' */
+  border: 2px solid #1b1b1b;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-test-login:hover {
+  background-color: #1d9393;
+  transform: scale(1.06);
+}
+
+.login-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.login-modal-box {
+  background: #ffffff;
+  padding: 26px;
+  border-radius: 20px;
+  border: 2px solid #1b1b1b;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.login-modal-desc {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 18px;
+}
+
+.login-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-modal-form input {
+  padding: 10px 14px;
+  border: 2px solid #1b1b1b;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-modal-cancel {
+  background-color: #f3f4f6;
+  color: #1b1b1b;
+  border: 2px solid #1b1b1b;
+  border-radius: 40px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-modal-submit {
+  background-color: #1d9393;
+  color: #ffffff;
+  border: 2px solid #1b1b1b;
+  border-radius: 40px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-modal-submit:hover {
+  background-color: #167575;
+}
+
+.extra-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+
+/* Media Queries */
 
 @media screen and (max-width: 900px) {
   .App {
@@ -313,12 +536,11 @@
   }
 
   .userform {
-    position: static;
+    position: relative;
     width: 100%;
     height: auto;
     min-width: auto;
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 3rem 1rem 2rem;
   }
 
   .userlist {
@@ -328,8 +550,8 @@
     gap: 1rem;
     max-width: 100%;
     margin: 0;
-    padding: 1rem;
-    margin-bottom: 2.5rem
+    padding: 1rem 1rem 2rem;
+    margin-bottom: 4rem
   }
 
   .usr-card {
@@ -352,5 +574,20 @@
     width: auto;
     max-width: 180px;
     padding: 12px 18px;
+  }
+
+  .app-footer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px 20px;
+    gap: 5px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
   }
 }
