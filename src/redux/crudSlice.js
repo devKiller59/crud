@@ -39,7 +39,7 @@ export const fetchAllUsers = () => (dispatch) => {
 export const editUserById = (userObj) => (dispatch) => {
   return editUser(userObj)
     .then(res => {
-      toast.success('¡Usuario editado con éxito! ✏️');
+      toast.success('User edited successfully! ✏️');
       dispatch(fetchAllUsers());
     })
     .catch(err => {
@@ -50,7 +50,7 @@ export const editUserById = (userObj) => (dispatch) => {
 export const deleteUserById = (_id) => (dispatch) => {
   return deleteUser(_id)
     .then(res => {
-      toast.success('Usuario eliminado correctamente 🗑️');
+      toast.success('User deleted successfully 🗑️');
       dispatch(fetchAllUsers());
     })
     .catch(err => {
@@ -61,13 +61,13 @@ export const deleteUserById = (_id) => (dispatch) => {
 export const createUser = (data) => (dispatch) => {
   return createNewUser(data)
     .then(res => {
-      toast.success('¡Usuario creado con éxito! 🎉');
+      toast.success('User created successfully! 🎉');
     })
     .catch(err => {
       if (err.response?.status === 500) {
-        toast.warning('Usuario guardado, sincronizando lista...');
+        toast.warning('User saved, synchronizing list...');
       } else {
-        const mensajeError = err.response?.data?.message || 'Error al registrar usuario';
+        const mensajeError = err.response?.data?.message || '❌ Error creating user';
         toast.error(mensajeError);
       }
     })

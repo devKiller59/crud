@@ -363,7 +363,7 @@ a {
   z-index: 99999;
 }
 
-.popup-contenido {
+.popup-content {
   background: #ffffff;
   padding: 26px;
   border-radius: 20px;
@@ -376,14 +376,14 @@ a {
   color: #111111;
 }
 
-.popup-botones {
+.popup-buttons {
   display: flex;
   justify-content: center;
   gap: 14px;
   margin-top: 24px;
 }
 
-.btn-cerrar {
+.btn-close {
   background-color: #f3f4f6;
   color: #111111;
   border: 2px solid #000000;
@@ -396,12 +396,12 @@ a {
   transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn-cerrar:hover {
+.btn-close:hover {
   background-color: #e5e7eb;
   transform: scale(1.02);
 }
 
-.btn-accion {
+.btn-action {
   background-color: #1d9393;
   color: #ffffff;
   border: 2px solid #000000;
@@ -417,7 +417,7 @@ a {
   transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn-accion:hover {
+.btn-action:hover {
   background-color: #157373;
   transform: scale(1.02);
 }

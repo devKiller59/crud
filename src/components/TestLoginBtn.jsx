@@ -21,12 +21,12 @@ export default function TestLoginBtn() {
         password
       });
 
-      toast.success(`✅ ¡Contraseña válida! Bienvenido ${res.data.user?.username || ''}`);
+      toast.success(`✅ Validated credentials! Welcome ${res.data.user?.username || ''}`);
       setIsOpen(false);
       setEmail('');
       setPassword('');
     } catch (err) {
-      const msg = err.response?.data?.message || '❌ Contraseña o correo incorrectos';
+      const msg = err.response?.data?.message || '❌ Invalid password or email';
       toast.error(msg);
     } finally {
       setLoading(false);
@@ -40,7 +40,7 @@ export default function TestLoginBtn() {
         type="button"
         className="btn-test-login"
         onClick={() => setIsOpen(true)}
-        title="Probar credenciales (Login)"
+        title="Test Credentials (Login)"
       >
         <FaKey size={16} />
       </button>
@@ -49,22 +49,22 @@ export default function TestLoginBtn() {
       {isOpen && createPortal(
         <div className="login-modal-overlay" onClick={() => setIsOpen(false)}>
           <div className="login-modal-box" onClick={(e) => e.stopPropagation()}>
-            <h3>Probar Credenciales</h3>
+            <h3>Test Credentials</h3>
             <p className="login-modal-desc">
-              Verifica si la contraseña registrada o actualizada coincide en KillerCore API.
+              Verify if the registered or updated password matches in KillerCore API.
             </p>
 
             <form onSubmit={handleTestLogin} className="login-modal-form">
               <input
                 type="email"
-                placeholder="E-mail del usuario"
+                placeholder="User email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <input
                 type="password"
-                placeholder="Contraseña a comprobar"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -76,14 +76,14 @@ export default function TestLoginBtn() {
                   className="btn-modal-cancel"
                   onClick={() => setIsOpen(false)}
                 >
-                  Cerrar
+                  Close
                 </button>
                 <button
                   type="submit"
                   className="btn-modal-submit"
                   disabled={loading}
                 >
-                  {loading ? 'Verificando...' : 'Comprobar'}
+                  {loading ? 'Verifying...' : 'Check'}
                 </button>
               </div>
             </form>

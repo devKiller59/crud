@@ -3,43 +3,43 @@ import { createPortal } from 'react-dom';
 import { FaQuestion } from 'react-icons/fa';
 
 export default function ActionBtn() {
-  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <>
       <button 
         className="btn-info" 
-        onClick={() => setMostrarPopup(true)}
-        title="Información importante"
+        onClick={() => setShowPopup(true)}
+        title="Important Information"
       >
         <FaQuestion size={18} />
       </button>
 
       {/* El popup se renderiza directamente en el <body> */}
-      {mostrarPopup && createPortal(
-        <div className="popup-overlay" onClick={() => setMostrarPopup(false)}>
-          <div className="popup-contenido" onClick={(e) => e.stopPropagation()}>
-            <h3>Acción requerida</h3>
+      {showPopup && createPortal(
+        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Action Required</h3>
             <p>
-              Antes de usar esta aplicación, es necesario validar que KillerCore API esté en funcionamiento.
+              Before using this application, it is necessary to validate that KillerCore API is running.
             </p>
             
-            <div className="popup-botones">
+            <div className="popup-buttons">
               <button 
-                className="btn-cerrar" 
-                onClick={() => setMostrarPopup(false)}
+                className="btn-close" 
+                onClick={() => setShowPopup(false)}
               >
-                Cerrar
+                Close
               </button>
 
               <a
                 href="https://dk59-crud-api.onrender.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-accion"
-                onClick={() => setMostrarPopup(false)}
+                className="btn-action"
+                onClick={() => setShowPopup(false)}
               >
-                Completar acción
+                Go to API
               </a>
             </div>
           </div>
